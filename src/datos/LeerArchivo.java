@@ -31,10 +31,10 @@ import javax.swing.SwingUtilities;
 			
 		Lista list=leerDatos();
 		double media=calcular.calcularMedia(list);
-		double desv=calcular.calcularDesviacion(list);
+		//double desv=calcular.calcularDesviacion(list);
 		  String nl = System.getProperty("line.separator");
 
-		JOptionPane.showMessageDialog(null,"Desviaci�n:"+""+desv+" "+nl+ "Media:"+" "+media);
+		//JOptionPane.showMessageDialog(null,"Desviaci�n:"+""+desv+" "+nl+ "Media:"+" "+media);
 		
 		
 		

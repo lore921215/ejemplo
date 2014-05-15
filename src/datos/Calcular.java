@@ -27,25 +27,6 @@ public class Calcular {
 	
 	}
 //*metodo*
-	public double calcularDesviacion(Lista lista){
-		
-		Nodo aux=lista.getPrimero();
-		int tam=lista.getTamano();
-
-		if(aux!=null){
-		while(aux.getSiguiente()!=null){
-	      xi=aux.getValor();
-          resulP+=((double) Math.pow((xi-media),2));
-			 aux=aux.getSiguiente();
-
-		}
-         xi=aux.getValor();
-        resulP+=((double) Math.pow((xi-media),2));
-        resulFinal=Math.sqrt((resulP/(tam-1)));
-        return resulFinal;
-		}
-		return resulFinal;
-		
-	}
+	
   //*finMetodo  
 }
