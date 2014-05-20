@@ -1,82 +1,79 @@
 package datos;
 
-
-import interfaz.Program1;
-
 import java.io.*;
+import java.util.ArrayList;
 
-import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
+// *clase*
+public class LeerArchivo {
 
-	public class LeerArchivo {
-		
-		
- 
-		public Lista lista=new Lista(0);
-	    Calcular calcular=new Calcular();
-	   
-	    File file;
-	    
-		public static void main(String[] args) {
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-				 LeerArchivo inst = new LeerArchivo();
+	Contador contador;
+	ArrayList<Parte> partes=new ArrayList<>();
+	Parte parte;
+	int tamañoTotal = 0;
+	int numPartes=0;
+
+	// *metodo*
+	public LeerArchivo() {
+		contador = new Contador();
+	}
+	// *finMetodo*
+
+	// *metodo*
+	public ArrayList<Parte> leerDatos(String ruta) {
+		try {
+			if(ruta!=null){
+				
+				//ArrayList<String>archivos=obtenerClase(ruta);
+				
+				//for (int i = 0; i < archivos.size(); i++) {
 					
+				//}
+				File file2= new File(ruta);
+
+				File files[]=file2.listFiles();
+				
+				for (int i = 0; i < files.length; i++) {
+					
+					boolean esParte=contador.esParte(files[i]);
+
+					if(esParte==true){
+					parte = new Parte();
+					parte.setNombre(files[i].getName());
+					parte.setNumeroItems(contador.contarMetodos(files[i]));
+					parte.setTamañoParte(contador.TamañoParte(files[i]));
+					tamañoTotal += contador.TamañoParte(files[i]);
+					partes.add(parte);
 				}
-			});
-		}
-		public LeerArchivo(){
-			
-		Lista list=leerDatos();
-		double media=calcular.calcularMedia(list);
-		//double desv=calcular.calcularDesviacion(list);
-		  String nl = System.getProperty("line.separator");
+					}
+	            return partes;
 
-		//JOptionPane.showMessageDialog(null,"Desviaci�n:"+""+desv+" "+nl+ "Media:"+" "+media);
-		
-		
-		
-		}
-		
-	   public Lista leerDatos() {
-		   
-		  JFileChooser jFileChooser1=new  JFileChooser();
-		  jFileChooser1.showOpenDialog(null);
-		  file=jFileChooser1.getSelectedFile();
-	      
-	      FileReader fr = null;
-	      BufferedReader br = null;
-	      
-	 
-	      try {
-	  
-	         fr = new FileReader (file);
-	         br = new BufferedReader(fr);
-	 
-	       
-	         String linea;
-	         while((linea=br.readLine())!=null){
-	        		 Nodo primero=new Nodo(Double.parseDouble(linea));
-	        		 lista.anadirNodo(primero);
+			}
 
-	         }
-	         return lista;
-	      }
-	      catch(Exception e){
-	         e.printStackTrace();
-	      }finally{
-	      	         try{                    
-	            if( null != fr ){   
-	               fr.close();     
-	            }                  
-	         }catch (Exception e2){ 
-	            e2.printStackTrace();
-	         }
-	      }
+
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(null,"El directorio no existe");
+		}
 		return null;
-	   }}
+	}
+	// *finMetodo*
+	
 	
 
+	// *metodo*
+	public int getTamañoTotal() {
+		return tamañoTotal;
+	}
+	// *finMetodo*
 
+	// *metodo*
+	public void setTamañoTotal(int tamañoTotal) {
+		this.tamañoTotal = tamañoTotal;
+	}
+	// *finMetodo*
+}
+// *finClase*
